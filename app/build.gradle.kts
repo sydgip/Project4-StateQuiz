@@ -4,7 +4,7 @@ plugins {
 
 android {
     namespace = "edu.uga.cs.project4"
-    compileSdk = 33
+    compileSdk = 34
 
     defaultConfig {
         applicationId = "edu.uga.cs.project4"
