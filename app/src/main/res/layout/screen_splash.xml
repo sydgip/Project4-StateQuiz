@@ -31,21 +31,21 @@
         android:orientation="horizontal">
 
         <Button
-            android:id="@+id/button"
+            android:id="@+id/helpButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Help"
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/button2"
+            android:id="@+id/playButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Play"
             android:layout_weight="1"/>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/scoreButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Scores"

@@ -15,14 +15,14 @@ public class SplashScreen extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.screen_splash);
-        Button helpButton = findViewById(R.id.button);
-        Button startButton = findViewById(R.id.button2);
+        Button helpButton = findViewById(R.id.helpButton);
+        Button startButton = findViewById(R.id.playButton);
 
         helpButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 // Create an Intent to start the MainActivity
-                Intent intent = new Intent(SplashScreen.this, MainActivity.class);
+                Intent intent = new Intent(SplashScreen.this, HelpActivity.class);
                 startActivity(intent);
             }
         });
