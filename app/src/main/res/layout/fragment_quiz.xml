@@ -1,49 +1,24 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    tools:context=".QuizFragment"
-    android:gravity="center">
+    tools:context=".QuizFragment">
 
-    <!-- TextView for displaying the quiz question -->
+    <!-- ViewPager for swiping through questions -->
+    <androidx.viewpager.widget.ViewPager
+        android:id="@+id/viewPager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+
+    <!-- TextView for question counter -->
     <TextView
-        android:id="@+id/questionTextView"
+        android:id="@+id/questionCounterTextView"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Quiz Question Goes Here"
-        android:textSize="18sp"
-        android:textStyle="bold"
-        android:padding="16dp"/>
-
-    <!-- RadioButtons for answer choices -->
-    <RadioButton
-        android:id="@+id/answerOption1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Answer Option 1"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"/>
-
-    <RadioButton
-        android:id="@+id/answerOption2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Answer Option 2"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"/>
-
-    <RadioButton
-        android:id="@+id/answerOption3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Answer Option 3"
-        android:paddingStart="16dp"
-        android:paddingTop="8dp"
-        android:paddingEnd="16dp"/>
-
-</LinearLayout>
+        android:text="Question X of 6"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentBottom="true"
+        android:padding="8dp"/>
+</RelativeLayout>

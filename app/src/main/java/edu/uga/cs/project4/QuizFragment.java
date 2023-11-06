@@ -1,20 +1,12 @@
 package edu.uga.cs.project4;
-
 import android.os.Bundle;
-
-import androidx.fragment.app.Fragment;
-
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-
-
-
 import android.widget.TextView;
-
+import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentManager;
 import androidx.fragment.app.FragmentPagerAdapter;
-import androidx.fragment.app.FragmentTransaction;
 import androidx.viewpager.widget.ViewPager;
 
 public class QuizFragment extends Fragment {
@@ -50,15 +42,6 @@ public class QuizFragment extends Fragment {
             public void onPageSelected(int position) {
                 int questionNumber = position + 1;
                 questionCounterTextView.setText("Question " + questionNumber + " of " + quizQuestions.length);
-
-                // Check if the user has reached the last question
-                if (position == quizQuestions.length - 1) {
-                    // Set the current item to display QuizResultFragment
-                    viewPager.setCurrentItem(position + 1);
-                }
-                else if (position == quizQuestions.length) {
-                    replaceWithQuizResultFragment();
-                }
             }
 
             @Override
@@ -84,21 +67,5 @@ public class QuizFragment extends Fragment {
         public int getCount() {
             return quizQuestions.length;
         }
-    }
-
-    // Method to replace the current fragment with QuizResultFragment
-    private void replaceWithQuizResultFragment() {
-        FragmentManager fragmentManager = getChildFragmentManager();
-        FragmentTransaction transaction = fragmentManager.beginTransaction();
-        String quizResult = calculateQuizResult(); // Calculate the quiz result
-        QuizResultFragment resultFragment = QuizResultFragment.newInstance(quizResult);
-        transaction.replace(R.id.viewPager, resultFragment);
-        transaction.commit();
-    }
-
-    // Implement the calculateQuizResult() method to calculate the quiz result
-    private String calculateQuizResult() {
-        // Implement your logic to calculate the result based on user answers
-        return "Quiz Result Goes Here";
     }
 }
