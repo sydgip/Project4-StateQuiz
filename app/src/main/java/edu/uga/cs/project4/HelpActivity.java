@@ -17,6 +17,7 @@ public class HelpActivity extends AppCompatActivity {
         if (getSupportActionBar() != null) {
             getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
+        CSVreader.readCSV(this);
     }
 
     @Override

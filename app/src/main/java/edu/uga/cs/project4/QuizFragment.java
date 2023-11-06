@@ -8,57 +8,97 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
-/**
- * A simple {@link Fragment} subclass.
- * Use the {@link QuizFragment#newInstance} factory method to
- * create an instance of this fragment.
- */
+
+
+import android.widget.TextView;
+
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentPagerAdapter;
+import androidx.fragment.app.FragmentTransaction;
+import androidx.viewpager.widget.ViewPager;
+
 public class QuizFragment extends Fragment {
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
+    private ViewPager viewPager;
+    private QuestionPagerAdapter questionPagerAdapter;
 
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
-
-    public QuizFragment() {
-        // Required empty public constructor
-    }
-
-    /**
-     * Use this factory method to create a new instance of
-     * this fragment using the provided parameters.
-     *
-     * @param param1 Parameter 1.
-     * @param param2 Parameter 2.
-     * @return A new instance of fragment QuizFragment.
-     */
-    // TODO: Rename and change types and number of parameters
-    public static QuizFragment newInstance(String param1, String param2) {
-        QuizFragment fragment = new QuizFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
-        return fragment;
-    }
-
-    @Override
-    public void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
-    }
+    private String[] quizQuestions = {
+            "Question 1: What is the capital of State 1?",
+            "Question 2: What is the capital of State 2?",
+            "more questions"
+            // Add more questions here...
+    };
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_quiz, container, false);
+        View view = inflater.inflate(R.layout.fragment_quiz, container, false);
+
+        // Initialize ViewPager and adapter
+        viewPager = view.findViewById(R.id.viewPager);
+        questionPagerAdapter = new QuestionPagerAdapter(getChildFragmentManager());
+        viewPager.setAdapter(questionPagerAdapter);
+
+        // Set up the question counter
+        final TextView questionCounterTextView = view.findViewById(R.id.questionCounterTextView);
+        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            }
+
+            @Override
+            public void onPageSelected(int position) {
+                int questionNumber = position + 1;
+                questionCounterTextView.setText("Question " + questionNumber + " of " + quizQuestions.length);
+
+                // Check if the user has reached the last question
+                if (position == quizQuestions.length - 1) {
+                    // Set the current item to display QuizResultFragment
+                    viewPager.setCurrentItem(position + 1);
+                }
+                else if (position == quizQuestions.length) {
+                    replaceWithQuizResultFragment();
+                }
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int state) {
+            }
+        });
+
+        return view;
+    }
+
+    private class QuestionPagerAdapter extends FragmentPagerAdapter {
+
+        public QuestionPagerAdapter(FragmentManager fm) {
+            super(fm);
+        }
+
+        @Override
+        public Fragment getItem(int position) {
+            return QuizQuestionFragment.newInstance(quizQuestions[position]);
+        }
+
+        @Override
+        public int getCount() {
+            return quizQuestions.length;
+        }
+    }
+
+    // Method to replace the current fragment with QuizResultFragment
+    private void replaceWithQuizResultFragment() {
+        FragmentManager fragmentManager = getChildFragmentManager();
+        FragmentTransaction transaction = fragmentManager.beginTransaction();
+        String quizResult = calculateQuizResult(); // Calculate the quiz result
+        QuizResultFragment resultFragment = QuizResultFragment.newInstance(quizResult);
+        transaction.replace(R.id.viewPager, resultFragment);
+        transaction.commit();
+    }
+
+    // Implement the calculateQuizResult() method to calculate the quiz result
+    private String calculateQuizResult() {
+        // Implement your logic to calculate the result based on user answers
+        return "Quiz Result Goes Here";
     }
 }
