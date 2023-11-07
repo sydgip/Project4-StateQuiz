@@ -1,4 +1,5 @@
 package edu.uga.cs.project4;
+
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
@@ -21,7 +22,9 @@ public class QuizFragment extends Fragment {
     private ViewPager viewPager;
     private QuestionPagerAdapter questionPagerAdapter;
     private List<String> quizQuestions = new ArrayList<>();
-
+    private List<String> quizCapitals = new ArrayList<>();
+    private List<String> quizAdditionalCities = new ArrayList<>();
+    private List<String> quizAdditionalCities2 = new ArrayList<>();
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -29,12 +32,18 @@ public class QuizFragment extends Fragment {
 
         DBhelper dbHelper = new DBhelper(getActivity());
         SQLiteDatabase db = dbHelper.getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM " + DBhelper.TABLE_QUESTIONS, null);
+        Cursor cursor = db.rawQuery("SELECT * FROM " + DBhelper.TABLE_QUESTIONS + " ORDER BY RANDOM() LIMIT 6", null);
         int count = 0;
         while (cursor.moveToNext() && count < 6) {
             String state = cursor.getString(cursor.getColumnIndex(DBhelper.KEY_STATE));
+            String capital = cursor.getString(cursor.getColumnIndex(DBhelper.KEY_CAPITAL_CITY));
+            String additionalCity = cursor.getString(cursor.getColumnIndex(DBhelper.KEY_ADDITIONAL_CITY2));
+            String additionalCityy = cursor.getString(cursor.getColumnIndex(DBhelper.KEY_ADDITIONAL_CITY3));
             quizQuestions.add("Question: What is the capital of " + state + "?");
-            Log.d("quizQeustion", "question: " + quizQuestions.get(count));
+            quizCapitals.add(capital);
+            quizAdditionalCities.add(additionalCity);
+            quizAdditionalCities2.add(additionalCityy);
+            Log.d("quizQuestion", "question: " + quizQuestions.get(count));
             count++;
         }
 
@@ -70,17 +79,21 @@ public class QuizFragment extends Fragment {
         return view;
     }
 
-
     private class QuestionPagerAdapter extends FragmentPagerAdapter {
 
         public QuestionPagerAdapter(FragmentManager fm) {
             super(fm);
         }
 
-        @Override
         public Fragment getItem(int position) {
-            return QuizQuestionFragment.newInstance(quizQuestions.get(position));
+            String question = quizQuestions.get(position);
+            String capital = quizCapitals.get(position); // Add a List<String> quizCapitals to store capital city names
+            String additionalCity = quizAdditionalCities.get(position); // Add a List<String> quizAdditionalCities
+            String additionalCityy = quizAdditionalCities2.get(position); // Add a List<String> quizAdditionalCities2
+
+            return QuizQuestionFragment.newInstance(question, capital, additionalCity, additionalCityy);
         }
+
 
         @Override
         public int getCount() {
