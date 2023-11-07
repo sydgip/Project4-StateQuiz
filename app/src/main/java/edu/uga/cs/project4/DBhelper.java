@@ -12,7 +12,6 @@ public class DBhelper extends SQLiteOpenHelper {
 
     // Table names
     public static final String TABLE_QUESTIONS = "quiz_questions";
-    public static final String TABLE_QUIZZES = "quizzes";
     public static final String TABLE_RELATIONSHIP = "quiz_question_relationship";
     public static final String TABLE_SAVE_QUIZZES = "user_scores";
 
@@ -46,31 +45,6 @@ public class DBhelper extends SQLiteOpenHelper {
             KEY_ADDITIONAL_CITY2 + " TEXT," +
             KEY_ADDITIONAL_CITY3+ " TEXT" +
             ")";
-    // this table holds the question id which is assigned to each state and the answer chosen by the user for each state capital
-    private static final String CREATE_TABLE_QUIZZES = "CREATE TABLE " + TABLE_QUIZZES + "(" +
-            KEY_QUIZ_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-            KEY_QUIZ_DATE + " DATE," +
-            KEY_QUIZ_RESULT + " INTEGER," +
-            KEY_QUESTIONS_ANSWERED + " INTEGER," +
-            "question_1_id INTEGER," +
-            "question_2_id INTEGER," +
-            "question_3_id INTEGER," +
-            "question_4_id INTEGER," +
-            "question_5_id INTEGER," +
-            "question_6_id INTEGER," +
-            "user_answer_1 TEXT," +
-            "user_answer_2 TEXT," +
-            "user_answer_3 TEXT," +
-            "user_answer_4 TEXT," +
-            "user_answer_5 TEXT," +
-            "user_answer_6 TEXT," +
-            "FOREIGN KEY (question_1_id) REFERENCES " + TABLE_QUESTIONS + "(" + KEY_QUESTION_ID + ")," +
-            "FOREIGN KEY (question_2_id) REFERENCES " + TABLE_QUESTIONS + "(" + KEY_QUESTION_ID + ")," +
-            "FOREIGN KEY (question_3_id) REFERENCES " + TABLE_QUESTIONS + "(" + KEY_QUESTION_ID + ")," +
-            "FOREIGN KEY (question_4_id) REFERENCES " + TABLE_QUESTIONS + "(" + KEY_QUESTION_ID + ")," +
-            "FOREIGN KEY (question_5_id) REFERENCES " + TABLE_QUESTIONS + "(" + KEY_QUESTION_ID + ")," +
-            "FOREIGN KEY (question_6_id) REFERENCES " + TABLE_QUESTIONS + "(" + KEY_QUESTION_ID + ")" +
-            ")";
 
     private static final String CREATE_TABLE_SAVE_QUIZZES = "CREATE TABLE " + TABLE_SAVE_QUIZZES + "(" +
             KEY_QUIZ_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
@@ -95,7 +69,6 @@ public class DBhelper extends SQLiteOpenHelper {
     @Override
     public void onCreate(SQLiteDatabase db) {
         db.execSQL(CREATE_TABLE_QUESTIONS);
-        db.execSQL(CREATE_TABLE_QUIZZES);
         db.execSQL(CREATE_TABLE_RELATIONSHIP);
         db.execSQL(CREATE_TABLE_SAVE_QUIZZES);
     }
