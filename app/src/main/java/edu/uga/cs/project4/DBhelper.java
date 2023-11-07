@@ -57,7 +57,7 @@ public class DBhelper extends SQLiteOpenHelper {
             KEY_QUESTION_ID + " INTEGER," +
             KEY_USER_ANSWER + " TEXT," +
             "PRIMARY KEY (" + KEY_QUIZ_ID + "," + KEY_QUESTION_ID + ")," +
-            "FOREIGN KEY (" + KEY_QUIZ_ID + ") REFERENCES " + TABLE_QUIZZES + "(" + KEY_QUIZ_ID + ")," +
+            "FOREIGN KEY (" + KEY_QUIZ_ID + ") REFERENCES " + TABLE_SAVE_QUIZZES + "(" + KEY_QUIZ_ID + ")," +
             "FOREIGN KEY (" + KEY_QUESTION_ID + ") REFERENCES " + TABLE_QUESTIONS + "(" + KEY_QUESTION_ID + ")" +
             ")";
 
@@ -76,7 +76,7 @@ public class DBhelper extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUESTIONS);
-        db.execSQL("DROP TABLE IF EXISTS " + TABLE_QUIZZES);
+        db.execSQL("DROP TABLE IF EXISTS " + TABLE_SAVE_QUIZZES);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_RELATIONSHIP);
         db.execSQL("DROP TABLE IF EXISTS " + TABLE_SAVE_QUIZZES);
         onCreate(db);
