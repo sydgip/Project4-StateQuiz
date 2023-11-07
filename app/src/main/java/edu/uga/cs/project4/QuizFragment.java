@@ -25,6 +25,9 @@ public class QuizFragment extends Fragment {
     private List<String> quizCapitals = new ArrayList<>();
     private List<String> quizAdditionalCities = new ArrayList<>();
     private List<String> quizAdditionalCities2 = new ArrayList<>();
+    private int currentQuestionIndex = 0;
+    private int userScore = 0;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -51,7 +54,7 @@ public class QuizFragment extends Fragment {
         db.close();
 
         // Shuffle the quiz questions
-        Collections.shuffle(quizQuestions);
+    //    Collections.shuffle(quizQuestions);
 
         // Initialize ViewPager and adapter
         viewPager = view.findViewById(R.id.viewPager);
@@ -63,22 +66,38 @@ public class QuizFragment extends Fragment {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                // Access the selected answer from the currently displayed QuizQuestionFragment
+                int selectedAnswer = ((QuizQuestionFragment) questionPagerAdapter.instantiateItem(viewPager, position)).getSelectedAnswer();
+
+                // Check the selected answer and increment the score
+                checkSelectedAnswer(selectedAnswer);
+                Log.d("QuizFragment", "Question " + " - Selected Answer: " + selectedAnswer);
+                Log.d("QuizFragment", "User Score: " + userScore);
+                if (position == quizQuestions.size()) {
+                    Log.d("QuizFragment", "FINAL User Score: " + userScore);
+                }
             }
 
             @Override
             public void onPageSelected(int position) {
                 int questionNumber = position + 1;
                 questionCounterTextView.setText("Question " + questionNumber + " of " + quizQuestions.size());
+
             }
 
             @Override
             public void onPageScrollStateChanged(int state) {
+
             }
         });
 
         return view;
     }
-
+    private void checkSelectedAnswer(int selectedAnswer) {
+        if (selectedAnswer == 1) {
+                userScore++; // Increment the score
+            }
+    }
     private class QuestionPagerAdapter extends FragmentPagerAdapter {
 
         public QuestionPagerAdapter(FragmentManager fm) {

@@ -48,7 +48,7 @@ public class DBhelper extends SQLiteOpenHelper {
 
     private static final String CREATE_TABLE_SAVE_QUIZZES = "CREATE TABLE " + TABLE_SAVE_QUIZZES + "(" +
             KEY_QUIZ_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +
-            KEY_QUIZ_DATE + " DATE," +
+            KEY_QUIZ_DATE + " DATETIME," +
             KEY_QUIZ_RESULT + " INTEGER," +
             KEY_QUESTIONS_ANSWERED + " INTEGER" +
             ")";

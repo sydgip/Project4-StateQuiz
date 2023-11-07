@@ -1,5 +1,6 @@
 package edu.uga.cs.project4;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -19,6 +20,10 @@ public class QuizQuestionFragment extends Fragment {
     private static String capital;
     private static String additionalCity1;
     private static String additionalCity2;
+    private RadioButton radioButton1;
+    private RadioButton radioButton2;
+    private RadioButton radioButton3;
+    private int selectedAnswer = 0; // Initialize to an invalid value
     public QuizQuestionFragment() {
         // Required empty public constructor
     }
@@ -59,16 +64,51 @@ public class QuizQuestionFragment extends Fragment {
             questionTextView.setText(questionText);
         }
 
-        RadioButton radioButton1 = view.findViewById(R.id.answerOption1);
-        RadioButton radioButton2 = view.findViewById(R.id.answerOption2);
-        RadioButton radioButton3 = view.findViewById(R.id.answerOption3);
+         radioButton1 = view.findViewById(R.id.answerOption1);
+         radioButton2 = view.findViewById(R.id.answerOption2);
+         radioButton3 = view.findViewById(R.id.answerOption3);
+
 
         // Set the text for answer choices (RadioButtons)
         radioButton1.setText(capital); // Correct answer
         radioButton2.setText(additionalCity1);
         radioButton3.setText(additionalCity2);
+        Log.d("Correct answer", "correct answer " + capital);
+
+
+        // Set up click listeners for the radio buttons
+        radioButton1.setOnClickListener(new View.OnClickListener() {
+            @Override
+                public void onClick(View v) {
+
+                       selectedAnswer = 1;
+                Log.d("RadioButton1", "Selected Answer: " + selectedAnswer);
+
+                }
+            });
+        radioButton2.setOnClickListener(new View.OnClickListener() {
+            @Override
+        public void onClick(View v) {
+            // Check if the selected option is correct (capital)
+
+                selectedAnswer = 2;
+                Log.d("RadioButton2", "Selected Answer: " + selectedAnswer);
+
+        }
+    });
+        radioButton3.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                    selectedAnswer = 3;
+                Log.d("RadioButton3", "Selected Answer: " + selectedAnswer);
+            }
+        });
 
 
         return view;
+    }
+    public int getSelectedAnswer() {
+        return selectedAnswer;
     }
 }
