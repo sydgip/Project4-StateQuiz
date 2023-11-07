@@ -1,5 +1,4 @@
 package edu.uga.cs.project4;
-package edu.uga.cs.project4;
 
 import android.os.AsyncTask;
 import android.os.Bundle;
