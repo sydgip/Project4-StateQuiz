@@ -22,7 +22,9 @@
                 <category android:name="android.intent.category.DEFAULT" />
             </intent-filter>
         </activity>
-
+        <activity android:name=".ScoresActivity">
+            <!-- Intent filters if needed -->
+        </activity>
         <activity
             android:name=".SplashScreen"
             android:exported="true"

@@ -68,11 +68,12 @@ public class QuizFragment extends Fragment {
             viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
                 @Override
                 public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                    int answer = ((QuizQuestionFragment) questionPagerAdapter.instantiateItem(viewPager, position)).getSelectedAnswer();
-
-                    // Save the selected answer
-                    selectedAnswer = answer;
-            }
+                    if (position < quizQuestions.size()) {
+                        int answer = ((QuizQuestionFragment) questionPagerAdapter.instantiateItem(viewPager, position)).getSelectedAnswer();
+                        // Save the selected answer
+                        selectedAnswer = answer;
+                    }
+                }
 
             @Override
             public void onPageSelected(int position) {
@@ -108,18 +109,26 @@ public class QuizFragment extends Fragment {
         }
 
         public Fragment getItem(int position) {
-            String question = quizQuestions.get(position);
-            String capital = quizCapitals.get(position); // Add a List<String> quizCapitals to store capital city names
-            String additionalCity = quizAdditionalCities.get(position); // Add a List<String> quizAdditionalCities
-            String additionalCityy = quizAdditionalCities2.get(position); // Add a List<String> quizAdditionalCities2
+            if (position < quizQuestions.size()) {
+                // Create and return QuizQuestionFragment for questions
+                String question = quizQuestions.get(position);
+                String capital = quizCapitals.get(position);
+                String additionalCity = quizAdditionalCities.get(position);
+                String additionalCityy = quizAdditionalCities2.get(position);
 
-            return QuizQuestionFragment.newInstance(question, capital, additionalCity, additionalCityy);
+                return QuizQuestionFragment.newInstance(question, capital, additionalCity, additionalCityy);
+            } else if (position == quizQuestions.size()) {
+                // Create and return QuizResultFragment when position matches the number of questions
+                return QuizResultFragment.newInstance("Quiz Result: " + userScore + " / " + quizQuestions.size());
+            } else {
+                return null;
+            }
         }
 
 
         @Override
         public int getCount() {
-            return quizQuestions.size();
+            return quizQuestions.size() + 1;
         }
     }
 }

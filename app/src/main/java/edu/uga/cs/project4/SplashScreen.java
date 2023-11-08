@@ -36,5 +36,14 @@ public class SplashScreen extends AppCompatActivity {
             }
         });
 
+        Button scoresButton = findViewById(R.id.scoreButton);
+        scoresButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to start the ScoresActivity
+                Intent intent = new Intent(SplashScreen.this, ScoresActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
