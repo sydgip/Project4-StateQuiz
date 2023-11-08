@@ -27,7 +27,8 @@ public class QuizFragment extends Fragment {
     private List<String> quizAdditionalCities2 = new ArrayList<>();
     private int currentQuestionIndex = 0;
     private int userScore = 0;
-    private boolean isAnswerChecked = false;
+    private int selectedAnswer = -1; // Initialize to an invalid value
+    private boolean answerChecked = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -64,10 +65,13 @@ public class QuizFragment extends Fragment {
 
         // Set up the question counter
         final TextView questionCounterTextView = view.findViewById(R.id.questionCounterTextView);
-        viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
-            @Override
-            public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+            viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+                @Override
+                public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+                    int answer = ((QuizQuestionFragment) questionPagerAdapter.instantiateItem(viewPager, position)).getSelectedAnswer();
 
+                    // Save the selected answer
+                    selectedAnswer = answer;
             }
 
             @Override
@@ -75,17 +79,13 @@ public class QuizFragment extends Fragment {
                 int questionNumber = position + 1;
                 questionCounterTextView.setText("Question " + questionNumber + " of " + quizQuestions.size());
 
-                // Access the selected answer from the currently displayed QuizQuestionFragment
-                int selectedAnswer = ((QuizQuestionFragment) questionPagerAdapter.instantiateItem(viewPager, position)).getSelectedAnswer();
-
                 // Check the selected answer and increment the score
                 checkSelectedAnswer(selectedAnswer);
-                Log.d("QuizFragment", "Question " + " - Selected Answer: " + selectedAnswer);
+                Log.d("QuizFragment", "Question - Selected Answer: " + selectedAnswer);
                 Log.d("QuizFragment", "User Score: " + userScore);
 
-                if (position == quizQuestions.size()) {
-                    Log.d("QuizFragment", "FINAL User Score: " + userScore);
-                }
+                // Reset the selected answer to an invalid value for the next question
+                selectedAnswer = -1;
             }
 
             @Override

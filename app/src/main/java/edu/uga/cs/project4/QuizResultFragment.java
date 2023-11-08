@@ -19,6 +19,7 @@ public class QuizResultFragment extends Fragment {
 
     private String quizResult;
     private Date quizDateTime;
+    private int selectedAnswer = -1; // Initialize to an invalid value
 
     public QuizResultFragment() {
         // Required empty public constructor
