@@ -13,6 +13,8 @@ import androidx.fragment.app.Fragment;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+
+
 public class QuizResultFragment extends Fragment {
 
     private String quizResult;
