@@ -69,6 +69,7 @@ public class QuizFragment extends Fragment {
                 // Access the selected answer from the currently displayed QuizQuestionFragment
                 int selectedAnswer = ((QuizQuestionFragment) questionPagerAdapter.instantiateItem(viewPager, position)).getSelectedAnswer();
 
+
                 // Check the selected answer and increment the score
                 checkSelectedAnswer(selectedAnswer);
                 Log.d("QuizFragment", "Question " + " - Selected Answer: " + selectedAnswer);
