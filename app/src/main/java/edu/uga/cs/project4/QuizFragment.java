@@ -27,6 +27,7 @@ public class QuizFragment extends Fragment {
     private List<String> quizAdditionalCities2 = new ArrayList<>();
     private int currentQuestionIndex = 0;
     private int userScore = 0;
+    private boolean isAnswerChecked = false;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -66,17 +67,7 @@ public class QuizFragment extends Fragment {
         viewPager.addOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
             public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
-                // Access the selected answer from the currently displayed QuizQuestionFragment
-                int selectedAnswer = ((QuizQuestionFragment) questionPagerAdapter.instantiateItem(viewPager, position)).getSelectedAnswer();
 
-
-                // Check the selected answer and increment the score
-                checkSelectedAnswer(selectedAnswer);
-                Log.d("QuizFragment", "Question " + " - Selected Answer: " + selectedAnswer);
-                Log.d("QuizFragment", "User Score: " + userScore);
-                if (position == quizQuestions.size()) {
-                    Log.d("QuizFragment", "FINAL User Score: " + userScore);
-                }
             }
 
             @Override
@@ -84,6 +75,17 @@ public class QuizFragment extends Fragment {
                 int questionNumber = position + 1;
                 questionCounterTextView.setText("Question " + questionNumber + " of " + quizQuestions.size());
 
+                // Access the selected answer from the currently displayed QuizQuestionFragment
+                int selectedAnswer = ((QuizQuestionFragment) questionPagerAdapter.instantiateItem(viewPager, position)).getSelectedAnswer();
+
+                // Check the selected answer and increment the score
+                checkSelectedAnswer(selectedAnswer);
+                Log.d("QuizFragment", "Question " + " - Selected Answer: " + selectedAnswer);
+                Log.d("QuizFragment", "User Score: " + userScore);
+
+                if (position == quizQuestions.size()) {
+                    Log.d("QuizFragment", "FINAL User Score: " + userScore);
+                }
             }
 
             @Override
