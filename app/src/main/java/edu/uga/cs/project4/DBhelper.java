@@ -56,9 +56,11 @@ public class DBhelper extends SQLiteOpenHelper {
             KEY_QUIZ_ID + " INTEGER," +
             KEY_QUESTION_ID + " INTEGER," +
             KEY_USER_ANSWER + " TEXT," +
+            KEY_CAPITAL_CITY + "TEXT," +
             "PRIMARY KEY (" + KEY_QUIZ_ID + "," + KEY_QUESTION_ID + ")," +
             "FOREIGN KEY (" + KEY_QUIZ_ID + ") REFERENCES " + TABLE_SAVE_QUIZZES + "(" + KEY_QUIZ_ID + ")," +
             "FOREIGN KEY (" + KEY_QUESTION_ID + ") REFERENCES " + TABLE_QUESTIONS + "(" + KEY_QUESTION_ID + ")" +
+            "FOREIGN KEY (" + KEY_CAPITAL_CITY + ") REFERENCES " + TABLE_QUESTIONS + "(" + KEY_CAPITAL_CITY + ")" +
             ")";
 
 
