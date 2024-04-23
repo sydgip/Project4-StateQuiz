@@ -25,5 +25,11 @@
         android:layout_gravity="center_horizontal"
         android:textSize="30sp"
         android:text="How To Play : " />
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text=" From the splash screen if you press the play button you get quizzed on 6 states and their capitals. the first question is presented to you with three options. You can choose one and then swipe to get to the next question. You keep doing that until you ge to the final screen which chows the result. You press the save quiz result button to save this quiz to the list of prior quizzes. Do Not Swipe to previous questions so be sure of your answer before you swipe to confirm your answer.The other button on the splash screen labeled scores allows you to see previous quiz results with the date and time , number of answered questions , and final result."
+        android:textSize="20sp" />
 
 </LinearLayout>
