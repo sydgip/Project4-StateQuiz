@@ -8,9 +8,14 @@ import android.widget.Button;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-
+/**
+ * SplashScreen class represents the initial screen of the quiz application.
+ * Users can navigate to different sections of the application from this screen.
+ */
 public class SplashScreen extends AppCompatActivity {
-
+    /**
+     * Called when the activity is starting.
+     */
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -36,5 +41,14 @@ public class SplashScreen extends AppCompatActivity {
             }
         });
 
+        Button scoresButton = findViewById(R.id.scoreButton);
+        scoresButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                // Create an Intent to start the ScoresActivity
+                Intent intent = new Intent(SplashScreen.this, PriorQuizActivity.class);
+                startActivity(intent);
+            }
+        });
     }
 }
